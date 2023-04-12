@@ -8,9 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "paket")
+@Table(name = "Paket")
 @Data
-public class paket {
+public class Paket {
     @Id
     @Column(name = "id")
     private int id;
