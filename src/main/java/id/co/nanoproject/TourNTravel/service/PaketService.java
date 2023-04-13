@@ -16,6 +16,6 @@ public class PaketService {
     }
 
     public String findHargaById(int id){
-        return repo.findHargaById(int id);
+        return repo.findHargaById(id);
     }
 }
