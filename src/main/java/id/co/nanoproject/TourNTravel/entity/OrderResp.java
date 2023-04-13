@@ -6,6 +6,6 @@ import lombok.Data;
 public class OrderResp {
 
     private String namaCust;
-    private String namaPaket;
+    private String harga;
     private String status_pembayaran;
 }

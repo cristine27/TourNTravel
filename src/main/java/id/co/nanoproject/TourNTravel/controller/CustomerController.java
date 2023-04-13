@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("cust")
 public class CustomerController {
 
@@ -23,7 +23,6 @@ public class CustomerController {
     public @ResponseBody Customer addNewCustomer(@RequestBody Customer customer){
         return service.addCustomer(customer);
     }
-
     @GetMapping("/update")
     public @ResponseBody Customer updateCustomer(@RequestBody Customer customer){
         return service.update(customer);

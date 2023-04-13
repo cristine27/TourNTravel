@@ -1,5 +1,6 @@
 package id.co.nanoproject.TourNTravel.service;
 
+import id.co.nanoproject.TourNTravel.entity.OrderReq;
 import id.co.nanoproject.TourNTravel.entity.OrderResp;
 import id.co.nanoproject.TourNTravel.repo.OrderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,20 @@ public class OrderService {
     @Autowired
     public OrderRepo repo;
 
-    public OrderResp orderPaket(String nama, String paket){
+    @Autowired
+    private CustomerService custService;
 
+    @Autowired
+    private PaketService paketService;
+
+    public OrderResp orderPaket(OrderReq orderReq){
+        String custName = custService.findNamaById(orderReq.getId_cust());
+        String hargaPaket = paketService.findHargaById(orderReq.getId_paket());
+
+        OrderResp resp = new OrderResp();
+        resp.setNamaCust(custName);
+        resp.setHarga(hargaPaket);
+        resp.setStatus_pembayaran("MENUNGGU PEMBAYARAN");
+        return resp;
     }
 }

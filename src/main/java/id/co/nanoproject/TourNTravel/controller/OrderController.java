@@ -1,18 +1,23 @@
 package id.co.nanoproject.TourNTravel.controller;
 
-import id.co.nanoproject.TourNTravel.entity.OrderResp;
+import id.co.nanoproject.TourNTravel.entity.OrderReq;
 import id.co.nanoproject.TourNTravel.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
+@RequestMapping("Order")
 public class OrderController {
 
     @Autowired
-    private OrderService service;
+    private OrderService orderService;
 
-    public OrderResp orderPaket(String nama, String paket){
-        service.
+    @PostMapping("")
+    public ResponseEntity<Object> orderPaket(@RequestBody OrderReq req){
+        return new ResponseEntity<>(
+                orderService.orderPaket(req),
+                HttpStatus.OK);
     }
 }

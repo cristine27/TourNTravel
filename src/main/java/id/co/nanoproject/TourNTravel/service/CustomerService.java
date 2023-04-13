@@ -28,4 +28,8 @@ public class CustomerService{
     public void deleteByid(int id){
         repo.deleteById(id);
     }
+
+    public String findNamaById(int id){
+        return repo.findNamaById(id);
+    }
 }
