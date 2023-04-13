@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class OrderService {
     private final String MENUNGGU_PEMBAYARAN = "MENUNGGU_PEMBAYARAN";
     @Autowired
-    public OrderRepo repo;
+    public OrderRepo orderRepo;
 
     @Autowired
     private CustomerService custService;
@@ -27,12 +27,17 @@ public class OrderService {
         newOrder.setId_paket(orderReq.getId_paket());
         newOrder.setId_cust(orderReq.getId_cust());
         newOrder.setStatus_pembayaran(MENUNGGU_PEMBAYARAN);
-        repo.save(newOrder);
+        int order_id = orderRepo.save(newOrder).getId();
 
         OrderResp resp = new OrderResp();
+        resp.setOrder_id(order_id);
         resp.setNamaCust(custName);
         resp.setHarga(hargaPaket);
         resp.setStatus_pembayaran(MENUNGGU_PEMBAYARAN);
         return resp;
+    }
+
+    public OrderResp updateStatusPembayaran(OrderReq req){
+        return null;
     }
 }
