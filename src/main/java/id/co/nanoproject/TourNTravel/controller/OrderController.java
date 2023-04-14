@@ -25,7 +25,7 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public @ResponseBody ResponseEntity<Object> getOrderById(@PathVariable("id") int id) {
+    public @ResponseBody ResponseEntity<Object> getOrderById(@PathVariable("id") int id) throws Exception {
         return new ResponseEntity<>(
                 orderService.findById(id),
                 HttpStatus.OK
