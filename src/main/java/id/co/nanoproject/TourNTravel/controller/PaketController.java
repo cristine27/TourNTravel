@@ -1,5 +1,6 @@
 package id.co.nanoproject.TourNTravel.controller;
 
+import id.co.nanoproject.TourNTravel.entity.OrderReq;
 import id.co.nanoproject.TourNTravel.model.Paket;
 import id.co.nanoproject.TourNTravel.service.PaketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,4 +27,10 @@ public class PaketController {
         return new ResponseEntity<>(paketService.findHargaById(paket_id), HttpStatus.OK);
     }
 
+    @PostMapping("/add")
+    public ResponseEntity<Object> orderPaket(@RequestBody Paket paket) {
+        return new ResponseEntity<>(
+                paketService.addNewPaket(paket),
+                HttpStatus.OK);
+    }
 }

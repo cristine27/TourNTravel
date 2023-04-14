@@ -7,6 +7,8 @@ import id.co.nanoproject.TourNTravel.repo.OrderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class OrderService {
     private final String MENUNGGU_PEMBAYARAN = "MENUNGGU_PEMBAYARAN";
@@ -39,5 +41,18 @@ public class OrderService {
 
     public OrderResp updateStatusPembayaran(OrderReq req){
         return null;
+    }
+    public OrderResp findById(int id){
+        Optional<OrderTransaction> orderTransaction = orderRepo.findById(id);
+        String custName = custService.findNamaById(orderTransaction.get().getId_cust());
+        String hargaPaket = paketService.findHargaById(orderTransaction.get().getId_paket());
+
+        OrderResp resp = new OrderResp();
+        resp.setOrder_id(orderTransaction.get().getId());
+        resp.setHarga(hargaPaket);
+        resp.setNamaCust(custName);
+        resp.setStatus_pembayaran(orderTransaction.get().getStatus_pembayaran());
+
+        return resp;
     }
 }
