@@ -2,6 +2,7 @@ package id.co.nanoproject.TourNTravel.service;
 
 import id.co.nanoproject.TourNTravel.entity.OrderReq;
 import id.co.nanoproject.TourNTravel.entity.OrderResp;
+import id.co.nanoproject.TourNTravel.model.Customer;
 import id.co.nanoproject.TourNTravel.model.OrderTransaction;
 import id.co.nanoproject.TourNTravel.repo.OrderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,13 +45,14 @@ public class OrderService {
     }
     public OrderResp findById(int id){
         Optional<OrderTransaction> orderTransaction = orderRepo.findById(id);
-        String custName = custService.findNamaById(orderTransaction.get().getId_cust());
+        Optional<Customer> cust = custService.findById(orderTransaction.isPresent() ? orderTransaction.get().getId_cust():null);
         String hargaPaket = paketService.findHargaById(orderTransaction.get().getId_paket());
 
         OrderResp resp = new OrderResp();
         resp.setOrder_id(orderTransaction.get().getId());
         resp.setHarga(hargaPaket);
-        resp.setNamaCust(custName);
+        resp.setNamaCust(cust.get().getNama());
+        resp.setNoKtp(cust.get().getNo_ktp());
         resp.setStatus_pembayaran(orderTransaction.get().getStatus_pembayaran());
 
         return resp;
