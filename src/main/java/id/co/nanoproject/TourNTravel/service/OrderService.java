@@ -46,7 +46,7 @@ public class OrderService {
     public OrderResp findById(int id){
         Optional<OrderTransaction> orderTransaction = orderRepo.findById(id);
         Optional<Customer> cust = custService.findById(orderTransaction.isPresent() ? orderTransaction.get().getId_cust():null);
-        String hargaPaket = paketService.findHargaById(orderTransaction.get().getId_paket());
+        String hargaPaket = paketService.findHargaById(orderTransaction.isPresent() ? orderTransaction.get().getId_paket():null);
 
         OrderResp resp = new OrderResp();
         resp.setOrder_id(orderTransaction.get().getId());
